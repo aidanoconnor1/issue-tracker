@@ -1,0 +1,10 @@
+.example {
+    transition:  opacity 0.5s;
+    opacity:1
+  }
+  
+  .example.hide {
+    opacity:0;
+    
+  }
+  

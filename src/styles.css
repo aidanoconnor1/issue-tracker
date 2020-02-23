@@ -1,0 +1,222 @@
+html {
+    background:#beef00;
+  }
+  
+  .App {
+    font-family: sans-serif;
+    text-align: center;
+    color:#ff0028;
+  }
+  a {
+    text-decoration: none;
+    color:#e4e4e4;
+  }
+  #ye{  
+   
+    font-size:20px;
+    display:inline-block;
+    width:100px;
+    height:0px;
+    margin-bottom:20px;
+  }
+  
+  .navbar {
+    background:#EC4E20;
+    width:100%;
+    height:50px;
+    padding:10px;
+    margin:-15px;
+    color:greenyellow;
+  }
+  
+  .search {
+    font-size:12px;
+    display:block;
+    float:right;  
+    width:200px;
+    margin-right:50px;
+  }
+  
+  
+  .nav {
+    display:flex;
+    justify-content:space-between
+  }
+  
+  #searchBox {
+    background:grey;
+    border:grey;
+    border-radius:5px;
+    margin-top:8px;
+    margin-left:-50px;
+  }
+  
+  #card {
+    display:block;
+    border:5px soild black;
+    width:150px;
+    height:150px;
+    background:green;
+    opacity: 80%;
+    border-radius:10px;
+    margin:80px;
+    padding:15px;
+    
+    box-shadow: 5px 5px 5px grey;
+    
+  }
+
+  #issuecard {
+   
+    border:5px soild black;
+    width:100%;
+    height:50%px;
+    background:green;
+    opacity: 80%;
+    border-radius:10px;
+    margin:50px;
+    padding:15px;
+    clear:both;
+
+  
+  }
+
+
+  
+
+
+  #card:hover {
+    background:lightgreen;
+  }
+  #issuecard:hover {
+    background:lightgreen;
+  }
+  
+  .results {
+    color:white;
+    text-align:center;
+  }
+  
+  .results #text {
+    font-size:40px;
+    padding:300px;
+    padding-left:600px;
+    text-align:center;
+  }
+  
+  #resultBox {
+    display:flex;
+    flex-wrap:wrap;
+    justify-content: space-around;
+   
+  }
+  
+  .results .btn {
+    background:rgb(0, 255, 98);
+    border:none;
+    padding:20px;
+    margin:10px;
+    font-size:20px;
+    border-radius:10px;
+    width:100px;
+  }
+  
+  #no:hover {
+    background:red;
+  
+  }
+  
+  
+  #yes:hover {
+    background:green;
+  
+  }
+
+
+  #form {
+    opacity:0.7;
+    margin:5px;
+    border-radius:8px;
+
+  }
+
+  #form2 {
+    
+    margin:5px;
+    border-radius:8px;
+    border:none;
+
+  }
+
+
+  #actionbox {
+    position:absolute;
+    right:30px;
+ color:black;
+ text-decoration:none;
+ float:right;
+ height:60px;
+ width:180px;
+ border:10px soild black;
+ background:#f9f9f9;
+ margin:30px;
+ border-radius:10px;
+ box-shadow: 10px 10px 5px grey;
+
+
+  }
+
+#actiontxt {
+  float:right;
+  position: relative;
+  right:15px;
+ 
+
+}
+#actionimg {
+  float:left;
+
+  top:16px;
+  left:10px;
+  position: relative;
+}
+
+
+
+.my-node-enter {
+  opacity: 0;
+  transform: scale(0.9);
+  background:green;
+}
+.my-node-enter-active {
+  opacity: 1;
+  transform: translateX(0);
+  transition: opacity 300ms, transform 300ms, background 3000ms;
+    background:blue;
+}
+.my-node-enter-done {
+  opacity:1;
+    background:blue;
+}
+
+#issuenav {
+  list-style-type:none;
+    display:flex;
+    flex-wrap:wrap;
+    justify-content: space-around;
+   
+  
+}
+
+.btn2 {
+ background:rgb(124, 233, 191);
+ border-radius:10px;
+ border:none;
+ padding:20px;
+ margin:10px;
+ width:100px;
+}
+
+.btn2:hover{
+  background:darkcyan;
+}
