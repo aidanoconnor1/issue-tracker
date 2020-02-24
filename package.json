@@ -1,6 +1,6 @@
 {
   "name": "issue-tracker",
-  "homepage":"https://aocissuetracker.herokuapp.com/"
+  "homepage":"https://aocissuetracker.herokuapp.com/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
