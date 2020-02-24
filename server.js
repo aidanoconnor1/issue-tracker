@@ -7,7 +7,7 @@ var cors        = require('cors');
 const mongoose = require('mongoose')
 const router = require('express').Router()
 var apiRoutes         = require('./routes/api.js');
-var fccTestingRoutes  = require('./routes/fcctesting.js');
+//var fccTestingRoutes  = require('./routes/fcctesting.js');
 
 require('dotenv').config()
 var app = express();

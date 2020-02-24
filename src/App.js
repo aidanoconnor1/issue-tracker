@@ -241,7 +241,7 @@ const issueSubmit = () => {
  
   // working home page get requestr for collections
   useEffect( () => {
-    axios.get('http://localhost:5000')
+    axios.get('http://localhost:5000/')
     .then(res => setResults(res.data.map(x => {
       return x.name
     })  ) )
@@ -311,7 +311,7 @@ const issueSubmit = () => {
         <Route  exact path='/:project' render={(props) => <IssueNav showHideEditForm={showHideEditForm} showHideSearchForm={showHideSearchForm}/>}/>
        {editForm ?  <Route exact path="/:project" render={(props) => <IssueForm {...props} issueTitle={issueTitle} issueSubmit={issueSubmit}  issue={issue}/>} /> : <p></p> }
        {searchForm ?  <Route exact path="/:project" render={(props) => <SearchIssue {...props} issueTitle={issueTitle} searchSubmit={searchSubmit}  issue={issue}/>} /> : <p></p> }
-        {searchIssueList.length === 0 ? issues :  sIssues}
+        {searchIssueList.length === 0 ? issues : sIssues}
        
         </div>
       </div>

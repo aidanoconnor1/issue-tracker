@@ -36,7 +36,6 @@ module.exports = function (app) {
         createdBy:req.body.createdBy,
         assignedTo:req.body.assignedTo,
         created_on:new Date(),
-        updated_on:new Date(),
         open:true,
         status_text:req.body.status
 
