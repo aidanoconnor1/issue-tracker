@@ -10,6 +10,7 @@ import IssueForm from "./components/IssueForm.components"
 import IssueComp from "./components/Issue.components"
 import axios from 'axios'
 import ActionBar from "./components/Action.components"
+import SearchIssue from "./components/SearchIssue"
 import IssueNav from "./components/Issuenav"
 import { CSSTransition } from 'react-transition-group';
 
@@ -30,10 +31,34 @@ export default function App({match}) {
   const [editIssue, setEditIssue] = useState("")
   const [action, setAction] = useState(false)
   const [editForm, setEditForm] = useState(false)
+  const [searchForm, setSearchForm] = useState(false)
+  const [searchIssueList, setSearchIssueList] = useState([])
 
-  const showHideForm = () => {
+  const showHideEditForm = () => {
+    setIssue({
+      title:"",
+      issue_text:"",
+      createdBy:"",
+      assignedTo:"",
+      open:issue.open
+    })
+    setEditIssue("")  
     setEditForm(!editForm)
+    setSearchForm(false)
     console.log(editForm)
+  }
+
+  const showHideSearchForm = () => {
+    setIssue({
+      title:"",
+      issue_text:"",
+      createdBy:"",
+      assignedTo:"",
+      open:issue.open
+    })
+    setEditIssue("") 
+    setEditForm(false)
+    setSearchForm(!searchForm)
   }
 
   useEffect( () => {
@@ -87,8 +112,52 @@ const issueSubmit = () => {
       setEditForm(!editForm)
   }
 
+  const searchSubmit = () => {
+    const param =  window.document.URL.substr(22)
+    const searchObj = {
+      issue_title:issue.title,
+      issue_text:issue.issue_text,
+      createdBy:issue.createdBy,
+      assignedTo:issue.assignedTo,      
+    }
+    if (searchObj.issue_title === ""){
+      delete searchObj.issue_title
+    }
+    if (searchObj.issue_text === ""){
+      delete searchObj.issue_text
+    }
+    if (searchObj.createdBy === ""){
+      delete searchObj.createdBy
+    }
+    if (searchObj.assignedTo === ""){
+      delete searchObj.assignedTo
+    }
+    let queryString = JSON.stringify(searchObj)
+    queryString = queryString.replace(/:/g , '=')
+    queryString = queryString.replace(/,/g, "&")
+    queryString = queryString.replace(/}/g, "")
+    queryString = queryString.replace(/{/g, "")
+    queryString = queryString.replace(/"/g, "")
+
+    axios.get(`http://localhost:5000/api/issues/${param}?${queryString}`)
+        .then(res => setSearchIssueList(res.data.map(x => {
+          return x
+        }) 
+      ) )
+        
+        setIssue({
+        title:"",
+        issue_text:"",
+        createdBy:"",
+        assignedTo:"",
+        open:""})
+        setEditForm(false)
+        setSearchForm(false)
+    }
+
   const showEdit = (key, issue) => {
-    console.log(issue)
+    setEditForm(false)
+    setSearchForm(false)
     setEditIssue(key)
     setIssue({
       title:issue.issue_title,
@@ -197,6 +266,14 @@ const issueSubmit = () => {
         <IssueComp issue={x} issueState={issue} id={'issue' + i} editFunction={issueTitle} showEdit={showEdit} hideEdit={hideEdit} submitEdit={submitEdit} issueDelete={issueDelete} issueStatusToggle={issueStatusToggle} editIssue={editIssue} key={i}/>}/>
     )
   })
+
+  let sIssues = searchIssueList.map((x,i) => {
+    return (
+     
+      <Route exact path='/:project'  render={(props) =>
+        <IssueComp issue={x} issueState={issue} id={'issue' + i} editFunction={issueTitle} showEdit={showEdit} hideEdit={hideEdit} submitEdit={submitEdit} issueDelete={issueDelete} issueStatusToggle={issueStatusToggle} editIssue={editIssue} key={i}/>}/>
+    )
+  })
   
   if (projects.length === 0) {
     text = search + " Project not Found";
@@ -209,7 +286,7 @@ const issueSubmit = () => {
   return (
     <Router className="App">
       <div className="navbar">
-      <Route exact Path="/" render={(props) => <SearchBar search={search} searchOnChange={searchOnChange} />} />
+      <Route exact path="/" render={(props) => <SearchBar search={search} searchOnChange={searchOnChange} />} />
      
       </div>
       <div />
@@ -226,14 +303,16 @@ const issueSubmit = () => {
       </div>
       <div className="results" id="resultBox">
         {projects.length === 0 ? (
-           <Route exact path="/" render={(props) => <NewProject id="text" text={text} onClick={onClick}/>} />
+           <Route exact path='/' render={(props) => <NewProject id="text" text={text} onClick={onClick}/>} />
         ) : (
           projects
         )}
         <div id="flex">
-        <IssueNav showHideForm={showHideForm}/>
+        <Route  exact path='/:project' render={(props) => <IssueNav showHideEditForm={showHideEditForm} showHideSearchForm={showHideSearchForm}/>}/>
        {editForm ?  <Route exact path="/:project" render={(props) => <IssueForm {...props} issueTitle={issueTitle} issueSubmit={issueSubmit}  issue={issue}/>} /> : <p></p> }
-        {issues}
+       {searchForm ?  <Route exact path="/:project" render={(props) => <SearchIssue {...props} issueTitle={issueTitle} searchSubmit={searchSubmit}  issue={issue}/>} /> : <p></p> }
+        {searchIssueList.length === 0 ? issues :  sIssues}
+       
         </div>
       </div>
     </Router>

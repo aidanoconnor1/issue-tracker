@@ -23,11 +23,9 @@ module.exports = function (app) {
   
     .get(function (req, res){
       var project = req.params.project;
-      mongoose.connection.db.collection(project).find().toArray()
+      mongoose.connection.db.collection(project).find(req.query).toArray()
        .then(issues => res.json(issues))
-       .catch(err => console.log(err))
-
-    //  console.log('hello')      
+       .catch(err => console.log(err))           
     })
     
     .post(function (req, res){
