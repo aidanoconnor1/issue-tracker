@@ -8,7 +8,7 @@ const mongoose = require('mongoose')
 const router = require('express').Router()
 var apiRoutes         = require('./routes/api.js');
 //var fccTestingRoutes  = require('./routes/fcctesting.js');
-
+const path = require("path")
 require('dotenv').config()
 var app = express();
 
@@ -67,6 +67,10 @@ app.use(function(req, res, next) {
 //depolyment stuff
 if (process.env.NODE_ENV === 'proudction'){
   app.use(express.static("./build"))
+
+  app.get('*', (req,res) => {
+    res.sendFile(path.join(__dirname, 'build', 'index.html'))
+  })
 }
 
 //Start our server and tests!
