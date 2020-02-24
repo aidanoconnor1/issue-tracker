@@ -68,9 +68,8 @@ app.use(function(req, res, next) {
 if (process.env.NODE_ENV === 'proudction'){
   app.use(express.static("./build"))
 
-  app.get('*', (req,res) => {
-    res.sendFile(path.join(__dirname, 'build', 'index.html'))
-  })
+  
+  
 }
 
 //Start our server and tests!
