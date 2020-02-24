@@ -64,6 +64,11 @@ app.use(function(req, res, next) {
     .send('Not Found');
 });
 
+//depolyment stuff
+if (process.env.NODE_ENV === 'proudction'){
+  app.use(express.static("./build"))
+}
+
 //Start our server and tests!
 app.listen(process.env.PORT || 5000, function () {
   console.log("Listening on port " + process.env.PORT);

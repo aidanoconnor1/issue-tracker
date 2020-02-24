@@ -21,10 +21,13 @@
     "nodemon": "^2.0.2"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "react-scripts start && nodemon server.js",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "build2": "cd build && npm run build",
+    "install-client": "cd build && npm install",
+    "heroku-postbuild":"npm run install-client && npm run build2"
   },
   "eslintConfig": {
     "extends": "react-app"
