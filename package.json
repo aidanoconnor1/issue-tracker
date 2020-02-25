@@ -23,16 +23,13 @@
     "react-transition-group": "^4.3.0"
   },
   "scripts": {
-      "start": "node server.js",
-      "server":"nodemon server.js",
-      "client":"npm start --prefix client",
-      "dev":"concurrently \"npm run server\" \"npm run client\"",
-      "build": "react-scripts build",
-      "test": "react-scripts test",
-      "eject": "react-scripts eject",
-      "install-client": "npm install  --prefix client",
-      "heroku-postbuild":"NPM_CONFIG_PRODUCTION=false npm install --prefix client        && npm run build --prefix client"
-    },
+    "start": "react-scripts start && nodemon server.js",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "install-client": "npm install",
+    "heroku-postbuild": "npm run install-client && npm run build"
+  },
   
   "eslintConfig": {
     "extends": "react-app"
